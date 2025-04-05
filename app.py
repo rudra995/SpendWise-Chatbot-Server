@@ -4,7 +4,8 @@ from flask_cors import CORS
 import os
 from dotenv import load_dotenv
 import google.generativeai as genai
-
+import eventlet
+eventlet.monkey_patch()
 load_dotenv()
 
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
@@ -33,7 +34,7 @@ You are an AI classifier. Your job is to determine whether the user's purchase i
 ONLY respond with:
 - "It is an impulsive purchase" → if the purchase is impulsive
 - "It is not an impulsive purchase" → if the purchase is not impulsive
-Do NOT explain.
+Explain in not more than 1 sentence why you think so.
 Examples:
 User: I saw a hoodie on Instagram and bought it immediately.
 Assistant: Yes
@@ -74,4 +75,5 @@ def handle_user_message(message):
         socketio.emit("bot_response", "Sorry, Gemini couldn't respond.") 
 
 if __name__ == "__main__":
-    socketio.run(app, host="127.0.0.1", port=5000, debug=True)
+    port = int(os.environ.get("PORT", 5000))  # Render sets this
+    socketio.run(app, host="0.0.0.0", port=port)
