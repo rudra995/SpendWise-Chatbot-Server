@@ -48,6 +48,8 @@ Assistant: Yes
 Please use some deep intelligent reasoning to determine if the purchase is impulsive or not.
 Apart from the given examples.
 If the scenario is not clear, you can ask for more details but keep it very short and dont ask repetetive or too many questions. Maximum 3 questions.
+Give one line of advice if the user asks for it.
+If the user asks for a suggestion, suggest them to think about it for a day and then decide.
 
 Now, evaluate:
 User: {user_input}
