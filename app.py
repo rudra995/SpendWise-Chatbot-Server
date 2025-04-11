@@ -74,7 +74,7 @@ def handle_user_message(message):
         socketio.emit("bot_response", bot_reply)
     except Exception as e:
         print("❌ Gemini Error:", e)
-        socketio.emit("bot_response", "Sorry, Gemini couldn't respond.") 
+        socketio.emit("bot_response", "Sorry, the API has reached its limit. Please try again in a minute.") 
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))  # Render sets this
